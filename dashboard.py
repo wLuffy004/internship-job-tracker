@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
+from matcher import calculate_match_score, get_matched_skills, get_missing_skills
+
 
 DB_NAME = "data/jobs.db"
 
@@ -45,6 +47,11 @@ jobs_df = load_jobs()
 
 st.sidebar.header("Filters")
 
+user_skills = st.sidebar.text_input(
+    "Enter your skills",
+    value="python, sql, git"
+)
+
 title_keyword = st.sidebar.text_input("Search by job title")
 skill_keyword = st.sidebar.text_input("Search by skill")
 
@@ -80,10 +87,26 @@ if selected_companies:
 if selected_locations:
     filtered_df = filtered_df[filtered_df["location"].isin(selected_locations)]
 
+filtered_df = filtered_df.copy()
+
+filtered_df["match_score"] = filtered_df["skills"].apply(
+    lambda skills: calculate_match_score(skills, user_skills)
+)
+
+filtered_df["matched_skills"] = filtered_df["skills"].apply(
+    lambda skills: get_matched_skills(skills, user_skills)
+)
+
+filtered_df["missing_skills"] = filtered_df["skills"].apply(
+    lambda skills: get_missing_skills(skills, user_skills)
+)
+
+filtered_df = filtered_df.sort_values(by="match_score", ascending=False)
+
 
 st.subheader("Overview")
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     st.metric("Filtered Jobs", len(filtered_df))
@@ -96,6 +119,12 @@ with col3:
 
 with col4:
     st.metric("Locations", filtered_df["location"].nunique())
+
+with col5:
+    if not filtered_df.empty:
+        st.metric("Best Match", f"{filtered_df['match_score'].max()}%")
+    else:
+        st.metric("Best Match", "N/A")
 
 
 st.subheader("Job Table")

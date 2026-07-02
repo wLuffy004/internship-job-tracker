@@ -2,7 +2,7 @@
 
 
 
-\## Day 0-2
+## Day 0-2
 
 
 
@@ -153,3 +153,24 @@ CSV Job Data
 
 Reflection:
 This milestone was important because it connected all previous modules into one complete workflow. The project is no longer just a collection of separate scripts. It now supports data storage, skill analysis, interactive filtering, and visual exploration through a dashboard. This makes the project much closer to a real-world data analysis application.
+
+## Day 12-14 - Resume Match Score System
+
+Today I added a resume skill matching system to the project.
+
+Completed:
+- Created matcher.py
+- Added skill parsing functions
+- Added match score calculation
+- Added matched skills output
+- Added missing skills output
+- Connected match score logic to dashboard.py
+- Sorted jobs by match score
+- Added best match metric to the dashboard
+- Saved progress screenshots
+
+Key Progress:
+The project can now compare job requirements with user skills and rank jobs by compatibility.
+
+Reflection:
+This feature makes the project much more useful for internship applications. Instead of only analyzing job postings, the dashboard can now evaluate which opportunities best match a user's current skill set and highlight missing skills for improvement.
