@@ -122,3 +122,34 @@ What I learned:
 
 * Current project flow: CSV file -> SQLite database -> data analysis -> skill frequency output
 
+## Day 9-11 - Streamlit Dashboard Development
+
+Today I completed the Streamlit dashboard module for the Internship Job Tracker & Skill Analyzer project.
+
+Completed:
+- Added Streamlit and matplotlib to requirements.txt
+- Built the first version of the Streamlit dashboard
+- Displayed overview metrics including total jobs, companies, and locations
+- Displayed the job table from the SQLite database
+- Added skill frequency analysis and skill visualization charts
+- Added a skills column to the SQLite jobs table
+- Migrated and updated database records with extracted skills
+- Connected the dashboard directly to the database
+- Moved filters to the sidebar
+- Added multi-select filters for companies and locations
+- Added job title keyword search
+- Added skill keyword search
+- Added CSV download for filtered job results
+- Improved dashboard layout and user experience
+- Added screenshots to document progress
+
+Key Progress:
+The project now has a complete working pipeline:
+
+CSV Job Data
+-> Skill Extraction
+-> SQLite Database Storage
+-> Streamlit Dashboard Visualization
+
+Reflection:
+This milestone was important because it connected all previous modules into one complete workflow. The project is no longer just a collection of separate scripts. It now supports data storage, skill analysis, interactive filtering, and visual exploration through a dashboard. This makes the project much closer to a real-world data analysis application.

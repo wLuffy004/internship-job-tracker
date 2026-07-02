@@ -16,84 +16,140 @@ def load_jobs():
     return df
 
 
+def build_skill_frequency(df):
+    all_skills = []
+
+    for skill_text in df["skills"].fillna(""):
+        skills = [skill.strip() for skill in skill_text.split(",") if skill.strip()]
+        all_skills.extend(skills)
+
+    skill_counter = Counter(all_skills)
+
+    skill_df = pd.DataFrame(
+        skill_counter.items(),
+        columns=["Skill", "Frequency"]
+    ).sort_values(by="Frequency", ascending=False)
+
+    return skill_df
+
+
 st.set_page_config(
     page_title="Internship Job Tracker Dashboard",
     layout="wide"
 )
 
 st.title("Internship Job Tracker & Skill Analyzer")
+st.caption("Track internship jobs, analyze required skills, and explore job market patterns.")
 
 jobs_df = load_jobs()
 
-st.subheader("Overview")
+st.sidebar.header("Filters")
 
-col1, col2, col3 = st.columns(3)
+title_keyword = st.sidebar.text_input("Search by job title")
+skill_keyword = st.sidebar.text_input("Search by skill")
 
-with col1:
-    st.metric("Total Jobs", len(jobs_df))
+company_options = sorted(jobs_df["company"].dropna().unique().tolist())
+selected_companies = st.sidebar.multiselect(
+    "Select companies",
+    company_options,
+    default=company_options
+)
 
-with col2:
-    st.metric("Companies", jobs_df["company"].nunique())
-
-with col3:
-    st.metric("Locations", jobs_df["location"].nunique())
-
-
-st.subheader("Filters")
+location_options = sorted(jobs_df["location"].dropna().unique().tolist())
+selected_locations = st.sidebar.multiselect(
+    "Select locations",
+    location_options,
+    default=location_options
+)
 
 filtered_df = jobs_df.copy()
 
-companies = ["All"] + sorted(jobs_df["company"].dropna().unique().tolist())
-selected_company = st.selectbox("Select Company", companies)
-
-if selected_company != "All":
-    filtered_df = filtered_df[filtered_df["company"] == selected_company]
-
-locations = ["All"] + sorted(jobs_df["location"].dropna().unique().tolist())
-selected_location = st.selectbox("Select Location", locations)
-
-if selected_location != "All":
-    filtered_df = filtered_df[filtered_df["location"] == selected_location]
-
-skill_keyword = st.text_input("Search Skill")
+if title_keyword:
+    filtered_df = filtered_df[
+        filtered_df["title"].fillna("").str.contains(title_keyword, case=False)
+    ]
 
 if skill_keyword:
     filtered_df = filtered_df[
         filtered_df["skills"].fillna("").str.contains(skill_keyword, case=False)
     ]
 
+if selected_companies:
+    filtered_df = filtered_df[filtered_df["company"].isin(selected_companies)]
+
+if selected_locations:
+    filtered_df = filtered_df[filtered_df["location"].isin(selected_locations)]
+
+
+st.subheader("Overview")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric("Filtered Jobs", len(filtered_df))
+
+with col2:
+    st.metric("Total Jobs", len(jobs_df))
+
+with col3:
+    st.metric("Companies", filtered_df["company"].nunique())
+
+with col4:
+    st.metric("Locations", filtered_df["location"].nunique())
+
 
 st.subheader("Job Table")
 st.dataframe(filtered_df, use_container_width=True)
 
+csv_data = filtered_df.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="Download Filtered Jobs as CSV",
+    data=csv_data,
+    file_name="filtered_jobs.csv",
+    mime="text/csv"
+)
+
 
 st.subheader("Skill Frequency")
 
-all_skills = []
+skill_df = build_skill_frequency(filtered_df)
 
-for skill_text in filtered_df["skills"].dropna():
-    skills = [skill.strip() for skill in skill_text.split(",") if skill.strip()]
-    all_skills.extend(skills)
+if not skill_df.empty:
+    st.dataframe(skill_df, use_container_width=True)
 
-skill_counter = Counter(all_skills)
+    st.subheader("Top Skills Chart")
 
-skill_df = pd.DataFrame(
-    skill_counter.items(),
-    columns=["Skill", "Frequency"]
-).sort_values(by="Frequency", ascending=False)
+    top_skills = skill_df.head(10)
 
-st.dataframe(skill_df, use_container_width=True)
-
-
-st.subheader("Top Skills Chart")
-
-top_skills = skill_df.head(10)
-
-if not top_skills.empty:
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 5))
     ax.bar(top_skills["Skill"], top_skills["Frequency"])
     ax.set_xlabel("Skill")
     ax.set_ylabel("Frequency")
     ax.set_title("Top 10 Skills")
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=45, ha="right")
     st.pyplot(fig)
+else:
+    st.info("No skill data found for the current filters.")
+
+
+st.subheader("Top Companies Chart")
+
+company_counts = (
+    filtered_df["company"]
+    .value_counts()
+    .reset_index()
+)
+
+company_counts.columns = ["Company", "Job Count"]
+
+if not company_counts.empty:
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.bar(company_counts["Company"], company_counts["Job Count"])
+    ax.set_xlabel("Company")
+    ax.set_ylabel("Job Count")
+    ax.set_title("Jobs by Company")
+    plt.xticks(rotation=45, ha="right")
+    st.pyplot(fig)
+else:
+    st.info("No company data found for the current filters.")
