@@ -154,9 +154,9 @@ CSV Job Data
 Reflection:
 This milestone was important because it connected all previous modules into one complete workflow. The project is no longer just a collection of separate scripts. It now supports data storage, skill analysis, interactive filtering, and visual exploration through a dashboard. This makes the project much closer to a real-world data analysis application.
 
-## Day 12-14 - Resume Match Score System
+## Day 12-14 - Resume Match Score System and HashMap Practice
 
-Today I added a resume skill matching system to the project.
+Today I added a resume skill matching system to the project and practiced more hash table problems.
 
 Completed:
 - Created matcher.py
@@ -167,10 +167,8 @@ Completed:
 - Connected match score logic to dashboard.py
 - Sorted jobs by match score
 - Added best match metric to the dashboard
-- Saved progress screenshots
-
-Key Progress:
-The project can now compare job requirements with user skills and rank jobs by compatibility.
+- Practiced LeetCode 242: Valid Anagram
+- Practiced LeetCode 383: Ransom Note
 
 Reflection:
-This feature makes the project much more useful for internship applications. Instead of only analyzing job postings, the dashboard can now evaluate which opportunities best match a user's current skill set and highlight missing skills for improvement.
+The project now helps compare user skills with internship requirements. I also practiced hash table frequency counting and learned how dictionary.get(key, default) works in Python.
