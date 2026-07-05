@@ -173,6 +173,20 @@ with col5:
         st.metric("Best Match", "N/A")
 
 
+st.subheader("Best Matching Job")
+
+if not filtered_df.empty:
+    best_job = filtered_df.iloc[0]
+
+    st.write(f"**Title:** {best_job['title']}")
+    st.write(f"**Company:** {best_job['company']}")
+    st.write(f"**Location:** {best_job['location']}")
+    st.write(f"**Match Score:** {best_job['match_score']}%")
+    st.write(f"**Matched Skills:** {best_job['matched_skills']}")
+    st.write(f"**Missing Skills:** {best_job['missing_skills']}")
+else:
+    st.info("No jobs found for the current filters.")
+
 st.subheader("Job Table")
 st.dataframe(filtered_df, use_container_width=True)
 
@@ -228,3 +242,25 @@ if not company_counts.empty:
     st.pyplot(fig)
 else:
     st.info("No company data found for the current filters.")
+    
+       
+st.subheader("Jobs by Location Chart")
+   
+location_counts = (
+    filtered_df["location"]
+    .value_counts()
+    .reset_index()
+)
+
+location_counts.columns = ["Location", "Job Count"]
+
+if not location_counts.empty:
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.bar(location_counts["Location"], location_counts["Job Count"])
+    ax.set_xlabel("Location")
+    ax.set_ylabel("Job Count")
+    ax.set_title("Jobs by Location")
+    plt.xticks(rotation=45, ha="right")
+    st.pyplot(fig)
+else:
+    st.info("No location data found for the current filters.")
