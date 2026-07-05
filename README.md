@@ -1,6 +1,9 @@
 # Internship Job Tracker & Skill Analyzer
 
-A Python-based internship job tracking and skill analysis project.
+A full-stack internship tracking and skill analysis dashboard built with Python, SQLite, and Streamlit.
+
+### Live Demo
+🔗 https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/
 
 This project helps users collect internship job data, extract required skills from job descriptions, store job records in a SQLite database, and explore the data through an interactive Streamlit dashboard.
 
