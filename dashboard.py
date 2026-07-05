@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from collections import Counter
 
@@ -5,15 +6,41 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
+from analysis import load_jobs as load_jobs_from_csv, add_skills_column
+from database import save_jobs_to_database
 from matcher import calculate_match_score, get_matched_skills, get_missing_skills
 
 
 DB_NAME = "data/jobs.db"
 
 
+def initialize_database_if_needed():
+    """
+    Create and populate the database from CSV if the database is missing.
+    """
+    if not os.path.exists(DB_NAME):
+        csv_df = load_jobs_from_csv()
+        csv_df = add_skills_column(csv_df)
+        save_jobs_to_database(csv_df)
+
+
 def load_jobs():
+    initialize_database_if_needed()
+
     conn = sqlite3.connect(DB_NAME)
-    df = pd.read_sql_query("SELECT * FROM jobs", conn)
+
+    try:
+        df = pd.read_sql_query("SELECT * FROM jobs", conn)
+    except Exception:
+        conn.close()
+
+        csv_df = load_jobs_from_csv()
+        csv_df = add_skills_column(csv_df)
+        save_jobs_to_database(csv_df)
+
+        conn = sqlite3.connect(DB_NAME)
+        df = pd.read_sql_query("SELECT * FROM jobs", conn)
+
     conn.close()
     return df
 
