@@ -79,7 +79,6 @@ Space Complexity:
 - O(1) if only lowercase English letters are used
 - O(k) for a general character set
 
-## 2026-07-04
 ### LeetCode 383 - Ransom Note
 
 Topic:
@@ -101,6 +100,7 @@ Time Complexity:
 Space Complexity:
 - O(k)
 
+## 2026-07-04
 ### LeetCode 49 - Group Anagrams
 
 Topic:
@@ -150,3 +150,78 @@ Time Complexity:
 
 Space Complexity:
 - O(n * k)
+
+## 2026-07-05
+### LeetCode 347 - Top K Frequent Elements
+
+Topic:
+- Hash Table
+- Dictionary
+- Sorting
+- Lambda
+- List Slicing
+
+Key Idea:
+Count the frequency of each number using a dictionary, sort the dictionary by frequency in descending order, and return the first k most frequent elements.
+
+What I learned:
+- Use a dictionary to count the frequency of each element
+- `count.items()` returns `(key, value)` pairs
+- `sorted()` can sort dictionary items using a custom key
+- `lambda item: item[1]` sorts by frequency instead of the number
+- `reverse=True` sorts in descending order
+- `list[:k]` returns the first k elements
+- `lambda` is an anonymous function and can replace a simple helper function
+
+Important Example:
+
+```python
+count = {}
+
+for num in nums:
+    count[num] = count.get(num, 0) + 1
+```
+
+Frequency Result:
+
+```python
+{
+    1: 3,
+    2: 2,
+    3: 1
+}
+```
+
+Sorting Example:
+
+```python
+sorted_items = sorted(
+    count.items(),
+    key=lambda item: item[1],
+    reverse=True
+)
+```
+
+Result:
+
+```python
+[(1, 3), (2, 2), (3, 1)]
+```
+
+Slicing Example:
+
+```python
+sorted_items[:2]
+```
+
+Result:
+
+```python
+[(1, 3), (2, 2)]
+```
+
+Time Complexity:
+- O(n log n)
+
+Space Complexity:
+- O(n)
