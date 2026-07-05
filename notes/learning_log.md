@@ -172,3 +172,38 @@ Completed:
 
 Reflection:
 The project now helps compare user skills with internship requirements. I also practiced hash table frequency counting and learned how dictionary.get(key, default) works in Python.
+
+## Day 15-17 - README, Project Cleanup, and Deployment
+
+Today I polished the project and deployed the Streamlit dashboard online.
+
+Completed:
+- Improved README.md with project overview, features, tech stack, screenshots, setup steps, and future improvements
+- Added the live demo link to README.md
+- Checked requirements.txt
+- Checked .gitignore
+- Verified the project folder structure
+- Fixed app.py so it preserves extracted skills when saving data to the database
+- Updated dashboard.py to automatically initialize the SQLite database from CSV when deployed
+- Deployed the dashboard to Streamlit Cloud
+- Confirmed the live app can be opened online
+
+Reflection:
+This stage made the project much more professional. The project is no longer only a local script. It now has documentation, a GitHub portfolio page, and a live deployed dashboard that other people can access.
+
+## Day 18-20 - UI Polish, Better Data, and Deployment Update
+
+Today I improved the deployed Streamlit dashboard and polished the project for portfolio use.
+
+Completed:
+- Improved the dashboard title and sidebar layout
+- Added clearer text for the skill input section
+- Expanded sample job data from 5 jobs to 10 jobs
+- Fixed skill frequency counting for database-loaded skill strings
+- Cleaned the local SQLite database and regenerated it from the updated CSV data
+- Confirmed the dashboard shows updated job data correctly
+- Synced all changes to GitHub
+- Confirmed Streamlit Cloud redeployed the latest version successfully
+
+Reflection:
+This update made the project look more complete and realistic. The dashboard now has better sample data, cleaner UI text, and a stable deployment workflow. The project is now strong enough to use as a portfolio MVP.
