@@ -4,11 +4,11 @@ from database import save_jobs_to_database, load_jobs_from_database
 
 def main():
     csv_df = load_jobs()
+    csv_df = add_skills_column(csv_df)
 
     save_jobs_to_database(csv_df)
 
     df = load_jobs_from_database()
-    df = add_skills_column(df)
 
     print("Total jobs in database:", len(df))
 
