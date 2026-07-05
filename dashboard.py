@@ -67,16 +67,20 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Internship Job Tracker & Skill Analyzer")
-st.caption("Track internship jobs, analyze required skills, and explore job market patterns.")
+st.title("📊 Internship Job Tracker & Skill Analyzer")
+st.caption(
+    "Analyze internship job postings, track required skills, and compare your skills with job requirements."
+) 
 
 jobs_df = load_jobs()
 
-st.sidebar.header("Filters")
+st.sidebar.title("🔍 Filter Panel")
+st.sidebar.caption("Use filters to explore jobs and match your skills.")
 
 user_skills = st.sidebar.text_input(
-    "Enter your skills",
-    value="python, sql, git"
+    "Your skills",
+    value="python, sql, git",
+    help="Enter your skills separated by commas."
 )
 
 title_keyword = st.sidebar.text_input("Search by job title")

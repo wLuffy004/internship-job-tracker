@@ -40,7 +40,16 @@ def count_skill_frequency(df):
     skill_counts = {}
 
     for skills in df["skills"]:
-        for skill in skills:
+        if isinstance(skills, list):
+            skill_list = skills
+        else:
+            skill_list = [
+                skill.strip()
+                for skill in str(skills).split(",")
+                if skill.strip()
+            ]
+
+        for skill in skill_list:
             skill_counts[skill] = skill_counts.get(skill, 0) + 1
 
     sorted_skill_counts = dict(
