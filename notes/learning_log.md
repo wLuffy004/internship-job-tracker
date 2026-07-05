@@ -207,3 +207,23 @@ Completed:
 
 Reflection:
 This update made the project look more complete and realistic. The dashboard now has better sample data, cleaner UI text, and a stable deployment workflow. The project is now strong enough to use as a portfolio MVP.
+
+## Day 21-23 - Resume Parser and Dashboard Enhancements
+
+Today I added a resume text parser and improved the dashboard with stronger portfolio features.
+
+Completed:
+- Created a resumes folder
+- Added sample_resume.txt for testing
+- Created resume_parser.py
+- Added a function to load resume text from a .txt file
+- Added resume skill extraction using the existing skill keyword list
+- Connected resume upload to the Streamlit dashboard
+- Added automatic skill extraction from uploaded resume text
+- Used extracted resume skills to calculate job match scores
+- Added a Best Matching Job section
+- Added a Jobs by Location chart
+- Added new screenshots for the resume upload and dashboard enhancement features
+
+Reflection:
+This update made the project more useful and closer to a real internship assistant tool. Instead of requiring users to manually enter skills, the dashboard can now extract skills from a resume text file and use them to rank internship jobs by match score.
