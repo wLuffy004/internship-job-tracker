@@ -1,0 +1,10 @@
+Xuefeng(Allen) Wang
+Computer Science Student
+
+Skills:
+Python, Java, SQL, Git, Excel, Data Analysis, Tableau, AWS, Linux
+
+Projects:
+Internship Job Tracker & Skill Analyzer
+Built a Streamlit dashboard using Python, pandas, SQLite, and matplotlib.
+Implemented skill extraction, job filtering, and resume-job match scoring.

@@ -9,7 +9,7 @@ import streamlit as st
 from analysis import load_jobs as load_jobs_from_csv, add_skills_column
 from database import save_jobs_to_database
 from matcher import calculate_match_score, get_matched_skills, get_missing_skills
-
+from resume_parser import extract_resume_skills
 
 DB_NAME = "data/jobs.db"
 
@@ -77,11 +77,26 @@ jobs_df = load_jobs()
 st.sidebar.title("🔍 Filter Panel")
 st.sidebar.caption("Use filters to explore jobs and match your skills.")
 
-user_skills = st.sidebar.text_input(
-    "Your skills",
-    value="python, sql, git",
-    help="Enter your skills separated by commas."
+uploaded_resume = st.sidebar.file_uploader(
+    "Upload resume text file",
+    type=["txt"]
 )
+
+default_skills = "python, sql, git"
+
+if uploaded_resume is not None:
+    resume_text = uploaded_resume.read().decode("utf-8")
+    extracted_skills = extract_resume_skills(resume_text)
+    user_skills = ", ".join(extracted_skills)
+
+    st.sidebar.success("Resume skills extracted successfully.")
+    st.sidebar.write(user_skills)
+else:
+    user_skills = st.sidebar.text_input(
+        "Your skills",
+        value=default_skills,
+        help="Enter your skills separated by commas."
+    )
 
 title_keyword = st.sidebar.text_input("Search by job title")
 skill_keyword = st.sidebar.text_input("Search by skill")
