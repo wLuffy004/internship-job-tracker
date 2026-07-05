@@ -57,7 +57,7 @@ A dictionary stores key-value pairs, while a set only stores unique values.
 For this problem, a set is cleaner because I only need to check whether a number has appeared before.  
 I also learned that `return False` should be outside the for loop, because the whole array must be checked first.
 
-## 2026-06=7-01
+## 2026-07-01
 ### LeetCode 242 - Valid Anagram
 
 Topic:
@@ -79,7 +79,7 @@ Space Complexity:
 - O(1) if only lowercase English letters are used
 - O(k) for a general character set
 
-
+## 2026-07-04
 ### LeetCode 383 - Ransom Note
 
 Topic:
@@ -100,3 +100,53 @@ Time Complexity:
 
 Space Complexity:
 - O(k)
+
+### LeetCode 49 - Group Anagrams
+
+Topic:
+- Hash Table
+- Dictionary
+- Sorting
+
+Key Idea:
+Use a dictionary to group words by their sorted character sequence.  
+Words that are anagrams will have the same sorted result.
+
+What I learned:
+- Use a dictionary when grouping data by key
+- Use a set when only checking existence or duplicates
+- Lists use `append()`, while sets use `add()`
+- `sorted(word)` returns a sorted list of characters
+- `"".join(sorted(word))` converts the sorted character list back into a string
+- Words with the same sorted result belong to the same anagram group
+- `list(groups.values())` returns all grouped word lists
+
+Important Example:
+```python
+word = "eat"
+key = "".join(sorted(word))
+```
+
+Result:
+```python
+sorted("eat")
+# ['a', 'e', 't']
+
+"".join(['a', 'e', 't'])
+# "aet"
+```
+
+Grouping Example:
+```python
+{
+    "aet": ["eat", "tea", "ate"],
+    "ant": ["tan", "nat"],
+    "abt": ["bat"]
+}
+```
+
+Time Complexity:
+- O(n * k log k)
+
+Space Complexity:
+- O(n * k)
