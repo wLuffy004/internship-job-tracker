@@ -1,137 +1,73 @@
-\# Learning Log
+# Learning Log
 
+## Day 0-2 - Project Setup and CSV Data
 
+Today I created the initial structure of the Internship Job Tracker project and learned the basic workflow for Python, CSV data, Git, and GitHub.
 
-## Day 0-2
+Completed:
+- Checked the Python and pip installation
+- Created the project folder structure
+- Created sample internship job data in CSV format
+- Used pandas to read CSV data
+- Printed job records and the total job count
+- Initialized a local Git repository
+- Connected the local project to GitHub
+- Created and pushed the first commit
 
+Reflection:
+This stage helped me understand the difference between Python and PowerShell, the difference between data and databases, and how CSV files store table-like information. I also learned the basic Git workflow of adding, committing, and pushing changes, as well as the meaning of the main branch and origin/main.
 
 
-What I completed:
+## Day 3-5 - Skill Extraction and Frequency Analysis
 
-\- Checked Python and pip installation
+Today I separated the project into reusable Python modules and added technical skill extraction and frequency analysis.
 
-\- Created project folder structure
+Completed:
+- Moved CSV loading logic into analysis.py
+- Created a skill keyword list in config.py
+- Built a function to extract skills from job descriptions
+- Added a skills column to the job DataFrame
+- Counted skill frequency across internship job postings
+- Updated app.py to call functions from analysis.py
+- Printed job records with extracted skills
+- Printed skill frequency results
+- Updated the LeetCode log for Two Sum
+- Practiced LeetCode 217: Contains Duplicate
 
-\- Created sample internship job data in CSV format
+Reflection:
+This stage taught me how to organize Python code across multiple files and reuse functions with imports. I also learned how to store configuration values in config.py, extract keywords from text, count frequencies with dictionaries, and choose between dictionaries and sets. The LeetCode exercises helped me understand why hash tables can reduce time complexity from O(n²) to O(n).
 
-\- Used pandas to read CSV data
 
-\- Printed job records and total job count
+## Day 6-8 - SQLite Database Integration
 
-\- Initialized Git repository
+Today I added SQLite database support and connected the data analysis workflow to persistent database storage.
 
-\- Connected local project to GitHub
+Completed:
+- Added SQLite database support to the project
+- Created database functions in database.py
+- Created a jobs table in SQLite
+- Saved job data from jobs.csv into data/jobs.db
+- Loaded job records from the SQLite database
+- Used database data for skill extraction and frequency analysis
+- Added duplicate prevention using apply_url as a unique field
+- Used database conflict handling to prevent duplicate job records
+- Updated app.py to use the database workflow
+- Added data/jobs.db to .gitignore
 
-\- Pushed the first commit to GitHub
+Reflection:
+This stage helped me understand that SQLite is a lightweight database stored in a local file. I learned the difference between CSV storage and database storage, how to create SQL tables, how to insert pandas data into SQLite, and how to load database records into a DataFrame. I also learned why database logic should be separated into database.py and why unique fields are important for preventing duplicate data.
 
-
-
-What I learned:
-
-\- Difference between Python and PowerShell
-
-\- Difference between data and database
-
-\- How CSV works as text-based table data
-
-\- Basic Git workflow: add, commit, push
-
-\- Meaning of main branch and origin/main
-
-## Day 3-5
-
-What I completed:
-
-* Moved CSV loading logic into analysis.py
-
-* Created a skill keyword list in config.py
-
-* Built a function to extract skills from job descriptions
-
-* Added a skills column to the job dataframe
-
-* Counted skill frequency across all internship jobs
-
-* Updated app.py to call functions from analysis.py
-
-* Printed job records with extracted skills
-
-* Printed skill frequency results
-
-* Updated LeetCode log for Two Sum
-
-* Practiced LeetCode 217: Contains Duplicate
-
-What I learned:
-
-* How to separate code into different Python files
-
-* How to use import to reuse functions from another file
-
-* How to store project configuration in config.py
-
-* How to extract keywords from text data
-
-* How to use a dictionary to count frequency
-
-* Difference between a dictionary and a set
-
-* Time complexity and space complexity of hash-based solutions
-
-* Why hash tables can reduce time complexity from O(n²) to O(n)
-
-## Day 6-8
-
-What I completed:
-
-* Added SQLite database support to the project
-
-* Created database functions in database.py
-
-* Created a jobs table in SQLite
-
-* Saved job data from jobs.csv into data/jobs.db
-
-* Loaded job data back from the SQLite database
-
-* Used database data for skill extraction and skill frequency analysis
-
-* Added duplicate prevention using apply_url as a unique field
-
-* Used INSERT OR IGNORE to avoid duplicate job records
-
-* Updated app.py to use the database workflow
-
-* Added data/jobs.db to .gitignore
-
-What I learned:
-
-* SQLite is a lightweight database stored in a local .db file
-
-* Difference between CSV storage and database storage
-
-* How to create a database table using SQL
-
-* How to insert data into a SQLite table from pandas
-
-* How to load database records back into a pandas DataFrame
-
-* Why unique fields help prevent duplicate records
-
-* Why database logic should be separated into database.py
-
-* Current project flow: CSV file -> SQLite database -> data analysis -> skill frequency output
 
 ## Day 9-11 - Streamlit Dashboard Development
 
-Today I completed the Streamlit dashboard module for the Internship Job Tracker & Skill Analyzer project.
+Today I completed the first interactive Streamlit dashboard for the Internship Job Tracker & Skill Analyzer project.
 
 Completed:
 - Added Streamlit and matplotlib to requirements.txt
 - Built the first version of the Streamlit dashboard
-- Displayed overview metrics including total jobs, companies, and locations
+- Displayed overview metrics for jobs, companies, and locations
 - Displayed the job table from the SQLite database
-- Added skill frequency analysis and skill visualization charts
+- Added skill frequency analysis and visualization
 - Added a skills column to the SQLite jobs table
 - Migrated and updated database records with extracted skills
 - Connected the dashboard directly to the database
@@ -140,23 +76,25 @@ Completed:
 - Added job title keyword search
 - Added skill keyword search
 - Added CSV download for filtered job results
-- Improved dashboard layout and user experience
+- Improved the dashboard layout and user experience
 - Added screenshots to document progress
 
-Key Progress:
-The project now has a complete working pipeline:
+Reflection:
+This milestone connected the previous modules into one complete workflow:
 
+```text
 CSV Job Data
 -> Skill Extraction
 -> SQLite Database Storage
 -> Streamlit Dashboard Visualization
+```
 
-Reflection:
-This milestone was important because it connected all previous modules into one complete workflow. The project is no longer just a collection of separate scripts. It now supports data storage, skill analysis, interactive filtering, and visual exploration through a dashboard. This makes the project much closer to a real-world data analysis application.
+The project was no longer a collection of separate scripts. It could now store data, analyze skills, filter internship records, and present results through an interactive interface.
 
-## Day 12-14 - Resume Match Score System and HashMap Practice
 
-Today I added a resume skill matching system to the project and practiced more hash table problems.
+## Day 12-14 - Resume Match Score System and Hash Table Practice
+
+Today I added a skill matching system and practiced additional hash table problems.
 
 Completed:
 - Created matcher.py
@@ -166,51 +104,55 @@ Completed:
 - Added missing skills output
 - Connected match score logic to dashboard.py
 - Sorted jobs by match score
-- Added best match metric to the dashboard
+- Added a best match metric to the dashboard
 - Practiced LeetCode 242: Valid Anagram
 - Practiced LeetCode 383: Ransom Note
 
 Reflection:
-The project now helps compare user skills with internship requirements. I also practiced hash table frequency counting and learned how dictionary.get(key, default) works in Python.
+The project could now compare user skills with internship requirements and rank jobs by compatibility. I also practiced hash table frequency counting and learned how dictionary.get(key, default) works in Python.
+
 
 ## Day 15-17 - README, Project Cleanup, and Deployment
 
-Today I polished the project and deployed the Streamlit dashboard online.
+Today I improved the project documentation, cleaned the repository, and deployed the Streamlit dashboard online.
 
 Completed:
-- Improved README.md with project overview, features, tech stack, screenshots, setup steps, and future improvements
+- Improved README.md with a project overview, features, tech stack, screenshots, setup steps, and future improvements
 - Added the live demo link to README.md
 - Checked requirements.txt
 - Checked .gitignore
 - Verified the project folder structure
-- Fixed app.py so it preserves extracted skills when saving data to the database
-- Updated dashboard.py to automatically initialize the SQLite database from CSV when deployed
+- Fixed app.py so extracted skills are preserved when saving data to the database
+- Updated dashboard.py to initialize the SQLite database automatically from CSV data
 - Deployed the dashboard to Streamlit Cloud
-- Confirmed the live app can be opened online
+- Confirmed that the live application could be opened online
 
 Reflection:
-This stage made the project much more professional. The project is no longer only a local script. It now has documentation, a GitHub portfolio page, and a live deployed dashboard that other people can access.
+This stage made the project more professional and accessible. The application was no longer limited to my local computer. It had complete documentation, a public GitHub repository, and a live dashboard that other users could access.
+
 
 ## Day 18-20 - UI Polish, Better Data, and Deployment Update
 
-Today I improved the deployed Streamlit dashboard and polished the project for portfolio use.
+Today I improved the deployed dashboard and expanded the sample internship data.
 
 Completed:
 - Improved the dashboard title and sidebar layout
-- Added clearer text for the skill input section
-- Expanded sample job data from 5 jobs to 10 jobs
+- Added clearer instructions for the skill input section
+- Expanded the sample job data from 5 jobs to 10 jobs
 - Fixed skill frequency counting for database-loaded skill strings
-- Cleaned the local SQLite database and regenerated it from the updated CSV data
-- Confirmed the dashboard shows updated job data correctly
+- Cleaned the local SQLite database
+- Regenerated the database from the updated CSV data
+- Confirmed that the dashboard displayed the updated data correctly
 - Synced all changes to GitHub
-- Confirmed Streamlit Cloud redeployed the latest version successfully
+- Confirmed that Streamlit Cloud redeployed the latest version
 
 Reflection:
-This update made the project look more complete and realistic. The dashboard now has better sample data, cleaner UI text, and a stable deployment workflow. The project is now strong enough to use as a portfolio MVP.
+This update made the dashboard more complete and realistic. It now had better sample data, clearer interface text, and a stable deployment workflow. At this stage, the project became strong enough to function as a portfolio MVP.
+
 
 ## Day 21-23 - Resume Parser and Dashboard Enhancements
 
-Today I added a resume text parser and improved the dashboard with stronger portfolio features.
+Today I added resume text parsing and expanded the dashboard with stronger job matching and analytics features.
 
 Completed:
 - Created a resumes folder
@@ -223,7 +165,30 @@ Completed:
 - Used extracted resume skills to calculate job match scores
 - Added a Best Matching Job section
 - Added a Jobs by Location chart
-- Added new screenshots for the resume upload and dashboard enhancement features
+- Added new screenshots for resume upload and dashboard analytics
 
 Reflection:
-This update made the project more useful and closer to a real internship assistant tool. Instead of requiring users to manually enter skills, the dashboard can now extract skills from a resume text file and use them to rank internship jobs by match score.
+This update made the project closer to a practical internship assistant. Users no longer needed to enter every skill manually because the dashboard could extract known technical skills from an uploaded text resume and use them to rank internship opportunities.
+
+
+## Day 24-25 - Portfolio Version 1.0 Final Review
+
+Today I completed the final portfolio review and prepared the Internship Job Tracker & Skill Analyzer for Portfolio Version 1.0.
+
+Completed:
+- Performed a complete review of the GitHub repository
+- Reviewed README.md, requirements.txt, .gitignore, source code, screenshots, and learning notes
+- Updated the README description from full-stack to end-to-end for greater technical accuracy
+- Improved the live demo link presentation
+- Updated the project structure to match the actual repository files
+- Corrected screenshot filenames and README image references
+- Clarified that data/jobs.db is generated automatically at runtime
+- Replaced the informal license statement with a Project Status section
+- Verified that the four dashboard screenshots exist and load correctly
+- Verified the Streamlit Cloud deployment
+- Reviewed the database, skill extraction, matching, and resume parser modules
+- Standardized the formatting of all learning log entries
+- Prepared the project to enter maintenance mode instead of continued large-scale feature development
+
+Reflection:
+This final review helped me understand that completing a software project includes more than writing code. A portfolio-ready project also needs accurate documentation, consistent file organization, a stable deployment, clear screenshots, and maintainable source code. Portfolio Version 1.0 is now feature-complete, and future updates will focus on bug fixes, documentation improvements, and deployment stability.

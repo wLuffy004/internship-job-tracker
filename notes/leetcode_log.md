@@ -1,104 +1,193 @@
+# LeetCode Learning Log
+
 ## 2026-06-27
+### LeetCode 1 - Two Sum
 
-### Problem 1: Two Sum
+Topic:
+- Array
+- Hash Table
 
-**Difficulty:** Easy
-**Topics:** Array, Hash Table
-**Status:** Accepted
+Key Idea:
+Use a dictionary called `seen` to store each previously visited number and its index. For each number, calculate the value needed to reach the target. If that value is already in `seen`, return the two indices.
 
-**Core Idea:**
-Use a hash map called `seen` to store the numbers that have already appeared and their indices.
-For each number in `nums`, calculate `need = target - num`.
-If `need` is already in `seen`, return the index of `need` and the current index.
-Otherwise, store the current number and its index in `seen`.
+What I learned:
+- A dictionary can store both a number and its index
+- `enumerate(nums)` provides the index and value during iteration
+- Hash tables can reduce the time complexity from O(n²) to O(n)
+- The needed value can be calculated with `target - num`
+- Dictionary membership checks are usually O(1)
 
-**Time Complexity:** O(n)
-The algorithm only loops through the array once.
+Important Example:
 
-**Space Complexity:** O(n)
-In the worst case, the hash map may store up to n numbers.
+```python
+nums = [2, 7, 11, 15]
+target = 9
 
-**Did I solve it independently?**
-Completed with guidance.
+seen = {}
 
-**What I learned:**
-I learned how to use a dictionary/hash map to reduce the time complexity from O(n²) to O(n).
-I also learned that `enumerate(nums)` gives both the index and the value while looping through a list.
+for index, num in enumerate(nums):
+    need = target - num
+
+    if need in seen:
+        return [seen[need], index]
+
+    seen[num] = index
+```
+
+Result:
+
+```python
+[0, 1]
+```
+
+Time Complexity:
+- O(n)
+
+Space Complexity:
+- O(n)
 
 
----
 ## 2026-06-28
+### LeetCode 217 - Contains Duplicate
 
-### Problem 217: Contains Duplicate
+Topic:
+- Array
+- Hash Table
+- Set
 
-**Difficulty:** Easy  
-**Topics:** Array, Hash Table, Set  
-**Status:** Accepted  
+Key Idea:
+Use a set called `seen` to store numbers that have already appeared. If the current number is already in the set, a duplicate exists. Otherwise, add the number to the set.
 
-**Core Idea:**  
-Use a set called `seen` to store the numbers that have already appeared.  
-For each number in `nums`, check whether the number is already in `seen`.  
-If the number is already in `seen`, return `True` because a duplicate exists.  
-Otherwise, add the current number to `seen`.  
-If the loop finishes without finding any duplicate, return `False`.
+What I learned:
+- A dictionary stores key-value pairs
+- A set stores unique values
+- A set is useful when only checking whether a value already exists
+- Sets use `add()` instead of `append()`
+- `return False` must be outside the loop because every number must be checked
 
-**Time Complexity:** O(n)  
-The algorithm only loops through the array once.
+Important Example:
 
-**Space Complexity:** O(n)  
-In the worst case, the set may store up to n numbers.
+```python
+nums = [1, 2, 3, 1]
+seen = set()
 
-**Did I solve it independently?**  
-Completed with guidance.
+for num in nums:
+    if num in seen:
+        return True
 
-**What I learned:**  
-I learned the difference between a dictionary and a set.  
-A dictionary stores key-value pairs, while a set only stores unique values.  
-For this problem, a set is cleaner because I only need to check whether a number has appeared before.  
-I also learned that `return False` should be outside the for loop, because the whole array must be checked first.
+    seen.add(num)
+
+return False
+```
+
+Result:
+
+```python
+True
+```
+
+Time Complexity:
+- O(n)
+
+Space Complexity:
+- O(n)
+
 
 ## 2026-07-01
 ### LeetCode 242 - Valid Anagram
 
 Topic:
 - Hash Table
+- Dictionary
 - Frequency Count
 
 Key Idea:
-Use a dictionary to count characters in one string, then subtract character counts using the other string.
+Use a dictionary to count the characters in the first string. Then subtract the character counts while reading the second string. The two strings are anagrams only when all character frequencies match.
 
 What I learned:
-- `dict.get(key, 0)` returns the current value if the key exists
-- If the key does not exist, it returns the default value `0`
-- Frequency count problems often use `dict[key] = dict.get(key, 0) + 1`
+- `dict.get(key, 0)` returns the current value when the key exists
+- It returns the default value `0` when the key does not exist
+- Frequency counting often uses `count[key] = count.get(key, 0) + 1`
+- Character counts can be increased for one string and decreased for another
+- Strings with different lengths cannot be anagrams
+
+Important Example:
+
+```python
+s = "anagram"
+t = "nagaram"
+
+char_count = {}
+
+for char in s:
+    char_count[char] = char_count.get(char, 0) + 1
+
+for char in t:
+    char_count[char] = char_count.get(char, 0) - 1
+```
+
+Result:
+
+```python
+True
+```
 
 Time Complexity:
 - O(n)
 
 Space Complexity:
-- O(1) if only lowercase English letters are used
+- O(1) when only lowercase English letters are used
 - O(k) for a general character set
 
+
+## 2026-07-01
 ### LeetCode 383 - Ransom Note
 
 Topic:
 - Hash Table
+- Dictionary
 - Frequency Count
 
 Key Idea:
-Use a dictionary to count available characters from magazine, then use ransomNote to consume those characters.
+Count the available characters in `magazine`, then use each character in `ransomNote` to reduce the corresponding count. If a required character is unavailable, return `False`.
 
 What I learned:
-- If characters cannot be reused, use a dictionary to track counts
-- If characters can be reused, a set is enough to check existence
+- A dictionary can track how many times each character is available
 - `char_count[char] -= 1` means one available character has been used
-- If the count becomes negative, there are not enough characters
+- Characters cannot be reused after their count reaches zero
+- A frequency dictionary is necessary when repeated values matter
+- A set is not enough because it does not store frequency
+
+Important Example:
+
+```python
+ransomNote = "aa"
+magazine = "aab"
+
+char_count = {}
+
+for char in magazine:
+    char_count[char] = char_count.get(char, 0) + 1
+
+for char in ransomNote:
+    if char not in char_count or char_count[char] == 0:
+        return False
+
+    char_count[char] -= 1
+```
+
+Result:
+
+```python
+True
+```
 
 Time Complexity:
 - O(n + m)
 
 Space Complexity:
 - O(k)
+
 
 ## 2026-07-04
 ### LeetCode 49 - Group Anagrams
@@ -109,25 +198,25 @@ Topic:
 - Sorting
 
 Key Idea:
-Use a dictionary to group words by their sorted character sequence.  
-Words that are anagrams will have the same sorted result.
+Use a dictionary to group words by their sorted character sequence. Words that are anagrams produce the same sorted string and therefore share the same dictionary key.
 
 What I learned:
-- Use a dictionary when grouping data by key
-- Use a set when only checking existence or duplicates
+- A dictionary can group multiple values under one key
+- A set is better for checking existence, while a dictionary is better for grouping
 - Lists use `append()`, while sets use `add()`
 - `sorted(word)` returns a sorted list of characters
-- `"".join(sorted(word))` converts the sorted character list back into a string
-- Words with the same sorted result belong to the same anagram group
+- `"".join(sorted(word))` converts the character list into a string
 - `list(groups.values())` returns all grouped word lists
 
 Important Example:
+
 ```python
 word = "eat"
 key = "".join(sorted(word))
 ```
 
 Result:
+
 ```python
 sorted("eat")
 # ['a', 'e', 't']
@@ -137,6 +226,7 @@ sorted("eat")
 ```
 
 Grouping Example:
+
 ```python
 {
     "aet": ["eat", "tea", "ate"],
@@ -151,6 +241,7 @@ Time Complexity:
 Space Complexity:
 - O(n * k)
 
+
 ## 2026-07-05
 ### LeetCode 347 - Top K Frequent Elements
 
@@ -162,16 +253,16 @@ Topic:
 - List Slicing
 
 Key Idea:
-Count the frequency of each number using a dictionary, sort the dictionary by frequency in descending order, and return the first k most frequent elements.
+Count the frequency of each number using a dictionary, sort the dictionary items by frequency in descending order, and return the first `k` numbers.
 
 What I learned:
-- Use a dictionary to count the frequency of each element
+- A dictionary can count the frequency of each element
 - `count.items()` returns `(key, value)` pairs
-- `sorted()` can sort dictionary items using a custom key
-- `lambda item: item[1]` sorts by frequency instead of the number
-- `reverse=True` sorts in descending order
-- `list[:k]` returns the first k elements
-- `lambda` is an anonymous function and can replace a simple helper function
+- `sorted()` can use a custom sorting key
+- `lambda item: item[1]` sorts by frequency instead of by number
+- `reverse=True` sorts values in descending order
+- `list[:k]` returns the first `k` elements
+- A lambda expression is a small anonymous function
 
 Important Example:
 
@@ -180,21 +271,7 @@ count = {}
 
 for num in nums:
     count[num] = count.get(num, 0) + 1
-```
 
-Frequency Result:
-
-```python
-{
-    1: 3,
-    2: 2,
-    3: 1
-}
-```
-
-Sorting Example:
-
-```python
 sorted_items = sorted(
     count.items(),
     key=lambda item: item[1],
@@ -205,23 +282,84 @@ sorted_items = sorted(
 Result:
 
 ```python
-[(1, 3), (2, 2), (3, 1)]
+nums = [1, 1, 1, 2, 2, 3]
+k = 2
+
+sorted_items
+# [(1, 3), (2, 2), (3, 1)]
+
+sorted_items[:k]
+# [(1, 3), (2, 2)]
 ```
 
-Slicing Example:
+Time Complexity:
+- O(n log n)
+
+Space Complexity:
+- O(n)
+
+
+## 2026-07-09
+### LeetCode 128 - Longest Consecutive Sequence
+
+Topic:
+- Array
+- Hash Set
+- Sequence Detection
+
+Key Idea:
+Convert the input list into a set for fast membership checks. A number is the beginning of a consecutive sequence only when `num - 1` is not in the set. From each sequence beginning, repeatedly check whether the next number exists and count the sequence length.
+
+What I learned:
+- Converting a list into a set allows average O(1) membership checks
+- `current_num` is a variable that tracks the current number in a sequence
+- `current_length` stores the length of the sequence currently being explored
+- `longest` stores the longest sequence length found so far
+- `if` checks once whether a number is a sequence starting point
+- `while` repeatedly moves forward while consecutive numbers exist
+- A problem may contain multiple sequence starting points
+- The outer `for` loop checks every possible starting point
+- `longest = max(longest, current_length)` keeps the larger of the previous best length and the current sequence length
+- `current_num += 1` and `current_length += 1` update variables, while expressions such as `current_num + 1` alone do not change them
+
+Important Example:
 
 ```python
-sorted_items[:2]
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        num_set = set(nums)
+        longest = 0
+
+        for num in num_set:
+            if num - 1 not in num_set:
+                current_num = num
+                current_length = 1
+
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_length += 1
+
+                longest = max(longest, current_length)
+
+        return longest
 ```
 
 Result:
 
 ```python
-[(1, 3), (2, 2)]
+nums = [100, 4, 200, 1, 3, 2]
+
+# Consecutive sequences:
+# [1, 2, 3, 4]
+# [100]
+# [200]
+
+# Longest sequence length:
+4
 ```
 
 Time Complexity:
-- O(n log n)
+- O(n)
 
 Space Complexity:
 - O(n)
