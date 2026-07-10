@@ -2,10 +2,15 @@
 
 A full-stack internship tracking and skill analysis dashboard built with Python, SQLite, and Streamlit.
 
-### Live Demo
+This project was developed as part of my Computer Science portfolio to practice data processing, database management, dashboard development, and software engineering workflow.
+
+## Live Demo
+
 🔗 https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/
 
-This project helps users collect internship job data, extract required skills from job descriptions, store job records in a SQLite database, and explore the data through an interactive Streamlit dashboard.
+This project helps users collect internship job data, extract required skills from job descriptions, store job records in a SQLite database, analyze resume-job matching, and explore the data through an interactive Streamlit dashboard.
+
+---
 
 ## Features
 
@@ -16,10 +21,14 @@ This project helps users collect internship job data, extract required skills fr
 - Prevent duplicate job records using apply URLs
 - Display job data in an interactive Streamlit dashboard
 - Filter jobs by title, company, location, and skill
-- Visualize top skills and company job counts
-- Calculate resume-job match scores based on user skills
-- Show matched skills and missing skills for each job
+- Upload a resume (.txt) and automatically extract skills
+- Calculate resume-job match scores
+- Display matched skills and missing skills
+- Identify the best matching internship
+- Visualize top skills, companies, and job locations
 - Download filtered job results as a CSV file
+
+---
 
 ## Tech Stack
 
@@ -28,7 +37,9 @@ This project helps users collect internship job data, extract required skills fr
 - SQLite
 - Streamlit
 - matplotlib
-- Git and GitHub
+- Git & GitHub
+
+---
 
 ## Project Structure
 
@@ -40,41 +51,78 @@ internship-job-tracker/
 ├── dashboard.py
 ├── database.py
 ├── matcher.py
-├── data/
-│   └── jobs.csv
-├── notes/
-│   ├── learning_log.md
-│   └── leetcode_log.md
-├── screenshots/
-│   ├── day9_streamlit_dashboard.png
-│   ├── day10_11_dashboard_filters.png
-│   └── day12_14_resume_match_score.png
+├── resume_parser.py
 ├── requirements.txt
+├── README.md
 ├── .gitignore
-└── README.md
+│
+├── data/
+│   ├── jobs.csv
+│   └── jobs.db
+│
+├── resumes/
+│   └── sample_resume.txt
+│
+├── screenshots/
+│   ├── day21_23_01_resume_upload.png
+│   ├── day21_23_02_best_matching_job.png
+│   ├── day21_23_03_skill_frequency_chart.png
+│   └── day21_23_04_location_chart.png
+│
+└── notes/
+    ├── learning_log.md
+    └── leetcode_log.md
 ```
+
+---
 
 ## Dashboard Preview
 
-### Dashboard Filters and Job Table
+### Dashboard Overview and Resume Matching
 
-![Dashboard Filters](screenshots/day10_11_dashboard_filters.png)
+![Dashboard Overview and Resume Matching](screenshots/day21_23_01_dashboard_overview_resume_matching.png)
 
-### Resume Match Score
+### Skill Frequency Analysis
 
-![Resume Match Score](screenshots/day12_14_resume_match_score.png)
+![Skill Frequency Analysis](screenshots/day21_23_02_dashboard_skill_frequency_analysis.png)
+
+### Company Distribution
+
+![Company Distribution](screenshots/day21_23_03_dashboard_company_distribution.png)
+
+### Location Distribution
+
+![Location Distribution](screenshots/day21_23_04_dashboard_location_distribution.png)
+
+---
 
 ## How It Works
 
-The project follows this basic workflow:
+The project follows this workflow:
 
 ```text
 CSV Job Data
--> Skill Extraction
--> SQLite Database Storage
--> Streamlit Dashboard
--> Resume Match Score Analysis
+        │
+        ▼
+Skill Extraction
+        │
+        ▼
+SQLite Database
+        │
+        ▼
+Resume Upload
+        │
+        ▼
+Resume Skill Extraction
+        │
+        ▼
+Match Score Analysis
+        │
+        ▼
+Interactive Streamlit Dashboard
 ```
+
+---
 
 ## Installation
 
@@ -91,53 +139,69 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
+---
+
 ## How to Run
 
-First, run the main app to process job data and update the database:
+First, process the internship data:
 
 ```bash
 python app.py
 ```
 
-Then launch the Streamlit dashboard:
+Then launch the dashboard:
 
 ```bash
 streamlit run dashboard.py
 ```
 
+---
+
 ## Resume Match Score
 
-The dashboard allows users to enter their own skills, such as:
+Users can either:
 
-```text
-python, sql, git
-```
+- Upload a resume text file (.txt)
+- Or manually enter their skills
 
-The system compares user skills with each job's required skills and calculates:
+The dashboard automatically compares user skills with internship requirements and displays:
 
-- Match score
-- Matched skills
-- Missing skills
+- Match Score
+- Matched Skills
+- Missing Skills
+- Best Matching Internship
 
-This helps users identify which internship roles are better matches and which skills they should improve.
+This helps users quickly identify suitable internship opportunities and understand which technical skills should be improved.
+
+---
 
 ## Learning Goals
 
 This project was built to practice:
 
-- Python fundamentals
-- pandas data processing
-- Hash table based skill counting
+- Python programming
+- Data processing with pandas
+- Python data structures (Hash Tables, Lists, Sets)
 - SQLite database operations
 - Streamlit dashboard development
-- Git and GitHub workflow
-- Project documentation and portfolio building
+- Resume-job matching
+- Git & GitHub workflow
+- Software project documentation
+- Portfolio development
+
+---
 
 ## Future Improvements
 
-- Add real internship job scraping
-- Add PDF resume parsing
-- Add AI-based job recommendation
-- Improve dashboard UI
-- Add unit tests
-- Deploy the dashboard online
+- Support PDF resume parsing
+- Add NLP-based resume skill extraction
+- Integrate real internship job scraping
+- Improve dashboard analytics
+- Add unit testing
+- Build an AI-powered job recommendation system
+
+---
+
+## License
+
+This project was created for educational purposes and portfolio demonstration.
