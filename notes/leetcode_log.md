@@ -267,6 +267,9 @@ What I learned:
 Important Example:
 
 ```python
+nums = [1, 1, 1, 2, 2, 3]
+k = 2
+
 count = {}
 
 for num in nums:
@@ -277,19 +280,21 @@ sorted_items = sorted(
     key=lambda item: item[1],
     reverse=True
 )
+
+result = [num for num, frequency in sorted_items[:k]]
 ```
 
 Result:
 
 ```python
-nums = [1, 1, 1, 2, 2, 3]
-k = 2
+count
+# {1: 3, 2: 2, 3: 1}
 
 sorted_items
 # [(1, 3), (2, 2), (3, 1)]
 
-sorted_items[:k]
-# [(1, 3), (2, 2)]
+result
+# [1, 2]
 ```
 
 Time Complexity:
