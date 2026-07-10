@@ -1,12 +1,12 @@
 # Internship Job Tracker & Skill Analyzer
 
-A full-stack internship tracking and skill analysis dashboard built with Python, SQLite, and Streamlit.
+A end-to-end internship tracking and skill analysis dashboard built with Python, SQLite, and Streamlit.
 
 This project was developed as part of my Computer Science portfolio to practice data processing, database management, dashboard development, and software engineering workflow.
 
 ## Live Demo
 
-🔗 https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/
+🔗 **[Open Live Demo](https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/)**
 
 This project helps users collect internship job data, extract required skills from job descriptions, store job records in a SQLite database, analyze resume-job matching, and explore the data through an interactive Streamlit dashboard.
 
@@ -14,12 +14,12 @@ This project helps users collect internship job data, extract required skills fr
 
 ## Features
 
-- Load internship job data from CSV files
+- Import internship job data from CSV files
 - Extract technical skills from job descriptions
 - Count skill frequency across job postings
 - Store job records in a SQLite database
 - Prevent duplicate job records using apply URLs
-- Display job data in an interactive Streamlit dashboard
+- Explore internship data through an interactive Streamlit dashboard
 - Filter jobs by title, company, location, and skill
 - Upload a resume (.txt) and automatically extract skills
 - Calculate resume-job match scores
@@ -58,16 +58,16 @@ internship-job-tracker/
 │
 ├── data/
 │   ├── jobs.csv
-│   └── jobs.db
+│   └── jobs.db  # Generated automatically at runtime
 │
 ├── resumes/
 │   └── sample_resume.txt
 │
 ├── screenshots/
-│   ├── day21_23_01_resume_upload.png
-│   ├── day21_23_02_best_matching_job.png
-│   ├── day21_23_03_skill_frequency_chart.png
-│   └── day21_23_04_location_chart.png
+│   ├── day21_23_01_dashboard_overview_resume_matching.png
+│   ├── day21_23_02_dashboard_skill_frequency_analysis.png
+│   ├── day21_23_03_dashboard_company_distribution.png
+│   └── day21_23_04_dashboard_location_distribution.png
 │
 └── notes/
     ├── learning_log.md
@@ -149,7 +149,7 @@ First, process the internship data:
 python app.py
 ```
 
-Then launch the dashboard:
+Then launch the Streamlit dashboard:
 
 ```bash
 streamlit run dashboard.py
@@ -187,7 +187,7 @@ This project was built to practice:
 - Resume-job matching
 - Git & GitHub workflow
 - Software project documentation
-- Portfolio development
+- Portfolio project development
 
 ---
 
@@ -202,6 +202,8 @@ This project was built to practice:
 
 ---
 
-## License
+## Project Status
 
-This project was created for educational purposes and portfolio demonstration.
+Portfolio Version 1.0 is feature-complete and currently in maintenance mode.
+
+Future updates will focus on bug fixes, documentation improvements, and deployment stability.
