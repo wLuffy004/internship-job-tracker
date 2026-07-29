@@ -1,32 +1,25 @@
 # Internship Job Tracker & Skill Analyzer
 
-A end-to-end internship tracking and skill analysis dashboard built with Python, SQLite, and Streamlit.
+An end-to-end internship tracking and skill analysis application built with Python, SQLite, and Streamlit.
 
-This project was developed as part of my Computer Science portfolio to practice data processing, database management, dashboard development, and software engineering workflow.
+It helps internship seekers organize job opportunities, identify in-demand technical skills, evaluate resume-job fit, and explore internship data through an interactive dashboard.
 
 ## Live Demo
 
-🔗 **[Open Live Demo](https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/)**
+🚀 **[Open Live Demo](https://internship-job-tracker-fdtpptf275ru5mysxvnkqd.streamlit.app/)**
 
-This project helps users collect internship job data, extract required skills from job descriptions, store job records in a SQLite database, analyze resume-job matching, and explore the data through an interactive Streamlit dashboard.
+## Key Features
 
----
-
-## Features
-
-- Import internship job data from CSV files
+- Import and manage internship job data
 - Extract technical skills from job descriptions
-- Count skill frequency across job postings
-- Store job records in a SQLite database
-- Prevent duplicate job records using apply URLs
-- Explore internship data through an interactive Streamlit dashboard
+- Store job records in SQLite with duplicate prevention
 - Filter jobs by title, company, location, and skill
-- Upload a resume (.txt) and automatically extract skills
+- Upload a resume and extract technical skills
 - Calculate resume-job match scores
-- Display matched skills and missing skills
-- Identify the best matching internship
-- Visualize top skills, companies, and job locations
-- Download filtered job results as a CSV file
+- Identify matched and missing skills
+- Find the best matching internship opportunities
+- Visualize skill demand, companies, and job locations
+- Download filtered job results as CSV
 
 ---
 
