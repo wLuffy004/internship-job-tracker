@@ -1,4 +1,7 @@
+import re
+
 import pandas as pd
+
 from config import SKILL_KEYWORDS
 
 
@@ -10,15 +13,25 @@ def load_jobs(file_path="data/jobs.csv"):
     return df
 
 
+def contains_skill(text, skill):
+    """
+    Check whether a skill appears as a complete word or phrase in text.
+    """
+    text = str(text).lower()
+    skill = skill.lower()
+
+    pattern = rf"(?<!\w){re.escape(skill)}(?!\w)"
+    return re.search(pattern, text) is not None
+
+
 def extract_skills(description):
     """
-    Extract skills from a job description.
+    Extract known technical skills from a job description.
     """
-    description = str(description).lower()
     found_skills = []
 
     for skill in SKILL_KEYWORDS:
-        if skill.lower() in description:
+        if contains_skill(description, skill):
             found_skills.append(skill)
 
     return found_skills
@@ -26,7 +39,7 @@ def extract_skills(description):
 
 def add_skills_column(df):
     """
-    Add a new column called 'skills' to the job dataframe.
+    Add a skills column to the job DataFrame.
     """
     df = df.copy()
     df["skills"] = df["description"].apply(extract_skills)
@@ -52,8 +65,10 @@ def count_skill_frequency(df):
         for skill in skill_list:
             skill_counts[skill] = skill_counts.get(skill, 0) + 1
 
-    sorted_skill_counts = dict(
-        sorted(skill_counts.items(), key=lambda item: item[1], reverse=True)
+    return dict(
+        sorted(
+            skill_counts.items(),
+            key=lambda item: item[1],
+            reverse=True
+        )
     )
-
-    return sorted_skill_counts
