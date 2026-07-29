@@ -14,7 +14,7 @@ It helps internship seekers organize job opportunities, identify in-demand techn
 - Extract technical skills from job descriptions
 - Store job records in SQLite with duplicate prevention
 - Filter jobs by title, company, location, and skill
-- Upload a resume and extract technical skills
+- Upload a resume text file and automatically extract technical skills
 - Calculate resume-job match scores
 - Identify matched and missing skills
 - Find the best matching internship opportunities
@@ -23,18 +23,95 @@ It helps internship seekers organize job opportunities, identify in-demand techn
 
 ---
 
-## Tech Stack
+## Dashboard Preview
 
-- Python
-- pandas
-- SQLite
-- Streamlit
-- matplotlib
-- Git & GitHub
+### Dashboard Overview & Resume Matching
+
+![Dashboard Overview and Resume Matching](screenshots/day21_23_01_dashboard_overview_resume_matching.png)
+
+### Skill Frequency Analysis
+
+![Skill Frequency Analysis](screenshots/day21_23_02_dashboard_skill_frequency_analysis.png)
+
+<details>
+<summary><strong>More Dashboard Analytics</strong></summary>
+
+### Company Distribution
+
+![Company Distribution](screenshots/day21_23_03_dashboard_company_distribution.png)
+
+### Location Distribution
+
+![Location Distribution](screenshots/day21_23_04_dashboard_location_distribution.png)
+
+</details>
 
 ---
 
-## Project Structure
+## Tech Stack
+
+- **Python** — application logic and data processing
+- **pandas** — internship data manipulation and analysis
+- **SQLite** — persistent job storage
+- **Streamlit** — interactive web dashboard
+- **matplotlib** — data visualization
+- **Git & GitHub** — version control and project management
+
+---
+
+## Technical Highlights
+
+- Modular Python architecture separating data analysis, database, matching, resume parsing, and dashboard logic
+- SQLite persistence with unique application URLs and conflict handling to prevent duplicate job records
+- Rule-based technical skill extraction from internship descriptions and resume text
+- Set-based resume-job matching using matched and missing skill analysis
+- Automatic SQLite database initialization from CSV data when the database is unavailable
+- Interactive filtering and ranking of internships by title, company, location, skill, and match score
+- Downloadable filtered results for further analysis
+
+---
+
+## How It Works
+
+The application follows this workflow:
+
+```text
+Internship Job Data (CSV)
+          │
+          ▼
+Technical Skill Extraction
+          │
+          ▼
+SQLite Database
+          │
+          ▼
+Interactive Job Filtering
+          │
+          ▼
+Resume / Skill Input
+          │
+          ▼
+Resume Skill Extraction
+          │
+          ▼
+Resume-Job Match Analysis
+          │
+          ▼
+Ranking & Data Visualization
+```
+
+The dashboard compares the user's skills with the technical skills required by each internship and calculates a match score.
+
+Jobs are then ranked by compatibility while showing:
+
+- Match Score
+- Matched Skills
+- Missing Skills
+- Best Matching Job
+
+---
+
+## Core Project Structure
 
 ```text
 internship-job-tracker/
@@ -56,147 +133,87 @@ internship-job-tracker/
 ├── resumes/
 │   └── sample_resume.txt
 │
-├── screenshots/
-│   ├── day21_23_01_dashboard_overview_resume_matching.png
-│   ├── day21_23_02_dashboard_skill_frequency_analysis.png
-│   ├── day21_23_03_dashboard_company_distribution.png
-│   └── day21_23_04_dashboard_location_distribution.png
-│
-└── notes/
-    ├── learning_log.md
-    └── leetcode_log.md
+└── screenshots/
+    ├── day21_23_01_dashboard_overview_resume_matching.png
+    ├── day21_23_02_dashboard_skill_frequency_analysis.png
+    ├── day21_23_03_dashboard_company_distribution.png
+    └── day21_23_04_dashboard_location_distribution.png
 ```
 
 ---
 
-## Dashboard Preview
+## Run Locally
 
-### Dashboard Overview and Resume Matching
-
-![Dashboard Overview and Resume Matching](screenshots/day21_23_01_dashboard_overview_resume_matching.png)
-
-### Skill Frequency Analysis
-
-![Skill Frequency Analysis](screenshots/day21_23_02_dashboard_skill_frequency_analysis.png)
-
-### Company Distribution
-
-![Company Distribution](screenshots/day21_23_03_dashboard_company_distribution.png)
-
-### Location Distribution
-
-![Location Distribution](screenshots/day21_23_04_dashboard_location_distribution.png)
-
----
-
-## How It Works
-
-The project follows this workflow:
-
-```text
-CSV Job Data
-        │
-        ▼
-Skill Extraction
-        │
-        ▼
-SQLite Database
-        │
-        ▼
-Resume Upload
-        │
-        ▼
-Resume Skill Extraction
-        │
-        ▼
-Match Score Analysis
-        │
-        ▼
-Interactive Streamlit Dashboard
-```
-
----
-
-## Installation
-
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/wLuffy004/internship-job-tracker.git
 cd internship-job-tracker
 ```
 
-Install dependencies:
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## How to Run
-
-First, process the internship data:
-
-```bash
-python app.py
-```
-
-Then launch the Streamlit dashboard:
+### 3. Launch the dashboard
 
 ```bash
 streamlit run dashboard.py
 ```
 
+The application automatically creates and populates the SQLite database from the CSV dataset if the database does not already exist.
+
+### Optional: Run the data processing workflow
+
+```bash
+python app.py
+```
+
+This processes the internship dataset, stores records in SQLite, and displays extracted skills and skill-frequency results in the terminal.
+
 ---
 
-## Resume Match Score
+## Resume Matching
 
 Users can either:
 
-- Upload a resume text file (.txt)
-- Or manually enter their skills
+- Upload a `.txt` resume
+- Manually enter technical skills
 
-The dashboard automatically compares user skills with internship requirements and displays:
+The application extracts recognized technical skills and compares them with the requirements of each internship.
 
-- Match Score
-- Matched Skills
-- Missing Skills
-- Best Matching Internship
+For each job, the match score is calculated as:
 
-This helps users quickly identify suitable internship opportunities and understand which technical skills should be improved.
+```text
+Match Score = Matched Required Skills / Total Required Skills × 100
+```
 
----
-
-## Learning Goals
-
-This project was built to practice:
-
-- Python programming
-- Data processing with pandas
-- Python data structures (Hash Tables, Lists, Sets)
-- SQLite database operations
-- Streamlit dashboard development
-- Resume-job matching
-- Git & GitHub workflow
-- Software project documentation
-- Portfolio project development
+The dashboard then ranks internship opportunities and displays the strongest match along with matched and missing skills.
 
 ---
 
-## Future Improvements
+## Database Design
 
-- Support PDF resume parsing
-- Add NLP-based resume skill extraction
-- Integrate real internship job scraping
-- Improve dashboard analytics
-- Add unit testing
-- Build an AI-powered job recommendation system
+Internship records are stored in a SQLite database.
+
+Each job contains:
+
+- Title
+- Company
+- Location
+- Description
+- Application URL
+- Source
+- Extracted Skills
+
+The application URL is used as a unique field to prevent duplicate job records. Existing records are updated when the same application URL is encountered again.
 
 ---
 
 ## Project Status
 
-Portfolio Version 1.0 is feature-complete and currently in maintenance mode.
+**Version 1.0 is feature-complete and deployed.**
 
-Future updates will focus on bug fixes, documentation improvements, and deployment stability.
+Current maintenance focuses on bug fixes, documentation improvements, and deployment stability.
